@@ -123,7 +123,21 @@
   function kotaeru() {
     var q = document.getElementById('shitsumon').value;
     if (q === '') return;
-    var henji = 'ご相談ありがとうございます。「' + q + '」について、一緒に考えていきましょう！（※ここは将来、本物のAIが答える部分です）';
+    var henji = '';
+
+    // 質問の中身によって返事を変える（ルールベース）
+    if (q.indexOf('料金') !== -1 || q.indexOf('値段') !== -1) {
+      henji = '料金についてですね。デモは無料、お試しPoCは低価格からご案内しています。';
+    } else if (q.indexOf('議事録') !== -1) {
+      henji = 'AI議事録「CollabMind」なら、会議の音声から要約・ToDoを自動作成できます。';
+    } else if (q.indexOf('納期') !== -1 || q.indexOf('いつ') !== -1) {
+      henji = '納期のご相談ですね。内容をお伺いして、最短のスケジュールをご提案します。';
+    } else if (q.indexOf('こんにちは') !== -1 || q.indexOf('はじめまして') !== -1) {
+      henji = 'こんにちは！合同会社BuiltFieldです。何でもご相談ください。';
+    } else {
+      henji = '「' + q + '」について承りました。詳しくお伺いしたいので、もう少し教えていただけますか？';
+    }
+
     document.getElementById('kotae').textContent = henji;
     document.getElementById('shitsumon').value = '';
   }
