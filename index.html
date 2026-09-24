@@ -78,14 +78,30 @@
 <ul id="list"></ul>
 
 <script>
+  // 保存されているデータを読み込む（なければ空の箱）
+  var memoList = JSON.parse(localStorage.getItem('memoList')) || [];
+
+  // 画面に表示する関数
+  function hyoji() {
+    document.getElementById('list').innerHTML = '';
+    for (var i = 0; i < memoList.length; i++) {
+      var li = document.createElement('li');
+      li.textContent = memoList[i];
+      document.getElementById('list').appendChild(li);
+    }
+  }
+
+  // 追加する関数
   function tsuika() {
     var nyuryoku = document.getElementById('todo').value;
     if (nyuryoku === '') return;
-    var atarashii = document.createElement('li');
-    atarashii.textContent = nyuryoku;
-    document.getElementById('list').appendChild(atarashii);
+    memoList.push(nyuryoku);                                   // 箱に足す
+    localStorage.setItem('memoList', JSON.stringify(memoList)); // 保存する
     document.getElementById('todo').value = '';
+    hyoji();                                                    // 表示し直す
   }
+
+  hyoji(); // ページを開いたとき、保存済みのものを表示
 </script>
 </body>
 </html>
