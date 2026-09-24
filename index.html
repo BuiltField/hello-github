@@ -72,7 +72,8 @@
     <p>JavaScript ／ WordPress ／ Webアプリ開発 ／ AIアプリ開発</p>
     <p>目標：基本情報技術者・G検定などの資格取得</p>
   </div>
-<button onclick="document.getElementById('msg').textContent='今日も一歩前進しました！💪'">クリックして応援メッセージ</button>
-<p id="msg">ここにメッセージが出ます</p>
+<input type="text" id="namae" placeholder="お名前を入力">
+<button onclick="document.getElementById('aisatsu').textContent = 'こんにちは、' + document.getElementById('namae').value + 'さん！'">あいさつする</button>
+<p id="aisatsu"></p>
 </body>
 </html>
