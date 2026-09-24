@@ -114,5 +114,19 @@
 
   hyoji();
 </script>
+<h2>ミニ相談ボット（AIの原型）</h2>
+<input type="text" id="shitsumon" placeholder="質問を入力してみて">
+<button onclick="kotaeru()">相談する</button>
+<p id="kotae"></p>
+
+<script>
+  function kotaeru() {
+    var q = document.getElementById('shitsumon').value;
+    if (q === '') return;
+    var henji = 'ご相談ありがとうございます。「' + q + '」について、一緒に考えていきましょう！（※ここは将来、本物のAIが答える部分です）';
+    document.getElementById('kotae').textContent = henji;
+    document.getElementById('shitsumon').value = '';
+  }
+</script>
 </body>
 </html>
