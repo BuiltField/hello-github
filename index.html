@@ -78,30 +78,41 @@
 <ul id="list"></ul>
 
 <script>
-  // 保存されているデータを読み込む（なければ空の箱）
   var memoList = JSON.parse(localStorage.getItem('memoList')) || [];
 
-  // 画面に表示する関数
   function hyoji() {
     document.getElementById('list').innerHTML = '';
     for (var i = 0; i < memoList.length; i++) {
       var li = document.createElement('li');
       li.textContent = memoList[i];
+
+      // 削除ボタンを作る
+      var btn = document.createElement('button');
+      btn.textContent = '✕';
+      btn.style.marginLeft = '10px';
+      btn.onclick = (function(index) {
+        return function() {
+          memoList.splice(index, 1);                                  // その項目を消す
+          localStorage.setItem('memoList', JSON.stringify(memoList)); // 保存し直す
+          hyoji();                                                    // 表示し直す
+        };
+      })(i);
+
+      li.appendChild(btn);
       document.getElementById('list').appendChild(li);
     }
   }
 
-  // 追加する関数
   function tsuika() {
     var nyuryoku = document.getElementById('todo').value;
     if (nyuryoku === '') return;
-    memoList.push(nyuryoku);                                   // 箱に足す
-    localStorage.setItem('memoList', JSON.stringify(memoList)); // 保存する
+    memoList.push(nyuryoku);
+    localStorage.setItem('memoList', JSON.stringify(memoList));
     document.getElementById('todo').value = '';
-    hyoji();                                                    // 表示し直す
+    hyoji();
   }
 
-  hyoji(); // ページを開いたとき、保存済みのものを表示
+  hyoji();
 </script>
 </body>
 </html>
