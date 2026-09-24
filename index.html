@@ -125,17 +125,22 @@
     if (q === '') return;
     var henji = '';
 
-    // 質問の中身によって返事を変える（ルールベース）
-    if (q.indexOf('料金') !== -1 || q.indexOf('値段') !== -1) {
-      henji = '料金についてですね。デモは無料、お試しPoCは低価格からご案内しています。';
+    if (q.indexOf('料金') !== -1 || q.indexOf('値段') !== -1 || q.indexOf('いくら') !== -1) {
+      henji = 'ご相談・お見積りは無料です。サービスは20,000円〜、内容に応じてお試しから始められます。';
+    } else if (q.indexOf('無料') !== -1) {
+      henji = 'ご相談・ヒアリングは無料です。実際の制作・導入から有料となります。';
     } else if (q.indexOf('議事録') !== -1) {
-      henji = 'AI議事録「CollabMind」なら、会議の音声から要約・ToDoを自動作成できます。';
+      henji = 'AI議事録「CollabMind」なら、会議の音声から要約・決定事項・ToDoを自動作成します。';
+    } else if (q.indexOf('チャット') !== -1 || q.indexOf('接客') !== -1 || q.indexOf('問い合わせ') !== -1) {
+      henji = 'AIチャット接客「AvatarDesk」で、お問い合わせの一次対応を自動化できます。';
+    } else if (q.indexOf('予測') !== -1 || q.indexOf('在庫') !== -1) {
+      henji = '需要予測「DemandSight」で、欠品や過剰在庫をAIで減らせます。';
     } else if (q.indexOf('納期') !== -1 || q.indexOf('いつ') !== -1) {
-      henji = '納期のご相談ですね。内容をお伺いして、最短のスケジュールをご提案します。';
+      henji = '納期はまず無料相談でお伺いし、最短のスケジュールをご提案します。';
     } else if (q.indexOf('こんにちは') !== -1 || q.indexOf('はじめまして') !== -1) {
-      henji = 'こんにちは！合同会社BuiltFieldです。何でもご相談ください。';
+      henji = 'こんにちは！合同会社BuiltFieldです。AI活用のご相談は無料です。何でもお聞かせください。';
     } else {
-      henji = '「' + q + '」について承りました。詳しくお伺いしたいので、もう少し教えていただけますか？';
+      henji = '「' + q + '」について承りました。まずは無料でご相談を承りますので、詳しく教えていただけますか？';
     }
 
     document.getElementById('kotae').textContent = henji;
